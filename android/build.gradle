@@ -18,11 +18,11 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
-    compileSdkVersion safeExtGet('Umeng_compileSdkVersion', 29)
-    buildToolsVersion safeExtGet('Umeng_buildToolsVersion', '29.0.2')
+    compileSdkVersion safeExtGet('compileSdkVersion', 29)
+    buildToolsVersion safeExtGet('buildToolsVersion', '29.0.2')
     defaultConfig {
-        minSdkVersion safeExtGet('Umeng_minSdkVersion', 16)
-        targetSdkVersion safeExtGet('Umeng_targetSdkVersion', 29)
+        minSdkVersion safeExtGet('minSdkVersion', 16)
+        targetSdkVersion safeExtGet('targetSdkVersion', 29)
         versionCode 1
         versionName "1.0"
 
@@ -55,4 +55,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    api "com.umeng.umsdk:common:${safeExtGet('umengCommonVersion', '9.4.4')}"
+    api "com.umeng.umsdk:asms:${safeExtGet('umengAsmsVersion', '1.4.1')}"
+    api "com.umeng.umsdk:apm:${safeExtGet('umengApmVersion', '1.5.2')}"
 }

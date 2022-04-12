@@ -1,4 +1,4 @@
-package com.reactnativeumeng;
+package co.yangdong.umeng;
 
 import androidx.annotation.NonNull;
 
