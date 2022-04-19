@@ -7,11 +7,13 @@
 
 -keep class com.umeng.** {*;}
 
+-keep class org.repackage.** {*;}
+
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
 -keepclassmembers enum * {
     public static **[] values();
     public static ** valueOf(java.lang.String);
-}
-
--keepclassmembers class * {
-   public <init>(org.json.JSONObject);
 }
