@@ -3,7 +3,6 @@ package co.yangdong.umeng;
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -41,8 +40,8 @@ public class UmengModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void init(ReadableMap options) {
         String appKey = options.getString("appKey");
         String channel = options.getString("channel");
@@ -50,33 +49,32 @@ public class UmengModule extends ReactContextBaseJavaModule {
         UMConfigure.init(this.context, appKey, channel, UMConfigure.DEVICE_TYPE_PHONE, pushSecret);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onPageStart(String pageName) {
         MobclickAgent.onPageStart(pageName);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onPageEnd(String pageName) {
         MobclickAgent.onPageEnd(pageName);
-
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onEvent(String eventId) {
         MobclickAgent.onEvent(context, eventId);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onEventWithLabel(String eventId, String eventLabel) {
         MobclickAgent.onEvent(context, eventId, eventLabel);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onEventWithMap(String eventId, ReadableMap map) {
         Map<String, String> rMap = new HashMap<String, String>();
         ReadableMapKeySetIterator iterator = map.keySetIterator();
@@ -97,8 +95,8 @@ public class UmengModule extends ReactContextBaseJavaModule {
         MobclickAgent.onEvent(context, eventId, rMap);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onEventWithMapAndCount(String eventId, ReadableMap map, int value) {
         Map<String, String> rMap = new HashMap();
         ReadableMapKeySetIterator iterator = map.keySetIterator();
@@ -119,8 +117,8 @@ public class UmengModule extends ReactContextBaseJavaModule {
         MobclickAgent.onEventValue(context, eventId, rMap, value);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void onEventObject(String eventId, ReadableMap property) {
         Map<String, Object> map = new HashMap();
         ReadableMapKeySetIterator iterator = property.keySetIterator();
@@ -138,13 +136,11 @@ public class UmengModule extends ReactContextBaseJavaModule {
                 map.put(key, property.getMap(key).toString());
             }
         }
-
         MobclickAgent.onEventObject(context, eventId, map);
-
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void registerPreProperties(ReadableMap map) {
         ReadableNativeMap map2 = (ReadableNativeMap) map;
         Map<String, Object> map3 = map2.toHashMap();
@@ -156,38 +152,37 @@ public class UmengModule extends ReactContextBaseJavaModule {
             String value = (String) entry.getValue();
             try {
                 json.put(key, value);
-            } catch (JSONException e) {
+            } catch (JSONException ignored) {
 
             }
         }
         MobclickAgent.registerPreProperties(context, json);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void unregisterPreProperty(String propertyName) {
         MobclickAgent.unregisterPreProperty(context, propertyName);
-
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void getPreProperties(Callback callback) {
         String result = MobclickAgent.getPreProperties(context).toString();
         callback.invoke(result);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void clearPreProperties() {
         MobclickAgent.clearPreProperties(context);
 
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void setFirstLaunchEvent(ReadableArray array) {
-        List<String> list = new ArrayList();
+        List<String> list = new ArrayList<String>();
         for (int i = 0; i < array.size(); i++) {
             if (ReadableType.Array == array.getType(i)) {
                 list.add(array.getArray(i).toString());
@@ -204,21 +199,27 @@ public class UmengModule extends ReactContextBaseJavaModule {
         MobclickAgent.setFirstLaunchEvent(context, list);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void profileSignInWithPUID(String puid) {
         MobclickAgent.onProfileSignIn(puid);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void profileSignInWithPUIDWithProvider(String provider, String puid) {
         MobclickAgent.onProfileSignIn(provider, puid);
     }
 
-    @ReactMethod
     @SuppressWarnings("unused")
+    @ReactMethod
     public void profileSignOff() {
         MobclickAgent.onProfileSignOff();
+    }
+
+    @SuppressWarnings("unused")
+    @ReactMethod
+    public void onKillProcess() {
+        MobclickAgent.onKillProcess(this.context);
     }
 }
