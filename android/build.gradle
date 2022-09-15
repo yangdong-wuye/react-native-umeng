@@ -58,7 +58,7 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-    api "com.umeng.umsdk:common:${safeExtGet('umengCommonVersion', '9.4.4')}"
-    api "com.umeng.umsdk:asms:${safeExtGet('umengAsmsVersion', '1.4.1')}"
-    api "com.umeng.umsdk:apm:${safeExtGet('umengApmVersion', '1.5.2')}"
+    api "com.umeng.umsdk:common:${safeExtGet('umengCommonVersion', '9.5.2')}"
+    api "com.umeng.umsdk:asms:${safeExtGet('umengAsmsVersion', '1.6.3')}"
+    api "com.umeng.umsdk:apm:${safeExtGet('umengApmVersion', '1.7.0')}"
 }
